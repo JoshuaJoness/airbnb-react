@@ -8,42 +8,35 @@ import '../styles/sidebar.css'
 import '../styles/icons.css'
 import Nav from './Nav'
 import Sidebar from './Sidebar'
+import Thumbnail from './Thumbnail'
 
 class Favorites extends React.Component {
+	state = {
+		activePage: 'Favorites',
+		places:
+		[
+			{
+				image:'https://q-ak.bstatic.com/images/hotel/max1024x768/186/186223203.jpg',
+					decription: 'Entire Villa • 3 Rooms',
+					type:'Luxury Villa Indu Siam',
+					location:'Koh Samui, Thailand',
+					price: '$198/night',
+					rating: 4,
+					reviews:'29 Reviews',
+			}
+		]
+	}
 	render () {
 		return (
 			<body>
 				<Nav />
 				<div className="grid medium">
 					<div className="grid sidebar-left">
-						<Sidebar />
+						<Sidebar activePage={this.state.activePage}/>
 						<div className="content">
 							<h2>My Favorites</h2>
 							<div className="grid two">
-								<a className="card link" href="place.html">
-									<div className="image" style={{backgroundImage: `(${'https://q-ak.bstatic.com/images/hotel/max1024x768/186/186223203.jpg'})`}}>
-										<button className="icon">
-											<i className="fas fa-heart"></i>
-										</button>
-									</div>
-									<div className="content">
-										<small className="meta">Entire Villa • 3 Rooms</small>
-										<h2>Luxury Villa Indu Siam</h2>
-										<small className="location">
-											<i className="fas fa-map-marker-alt"></i>
-											<span>Koh Samui, Thailand</span>
-										</small>
-										<span className="price">$198/night</span>
-										<span className="rating">
-											<i className="fas fa-star"></i>
-											<i className="fas fa-star"></i>
-											<i className="fas fa-star"></i>
-											<i className="fas fa-star"></i>
-											<i className="far fa-star"></i>
-											<span>29 Reviews</span>
-										</span>
-									</div>
-								</a>
+								{this.state.places.map(place => <Thumbnail place={place}/>)}
 							</div>
 						</div>
 					</div>

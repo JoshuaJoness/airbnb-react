@@ -8,8 +8,21 @@ import '../styles/sidebar.css'
 import '../styles/users.css'
 import '../styles/icons.css'
 import Nav from './Nav'
+import Thumbnail from './Thumbnail'
 
 class Confirm extends React.Component {
+	state = {
+		place: [
+			{
+				image: 'https://q-ak.bstatic.com/images/hotel/max1024x768/186/186223203.jpg',
+				description: 'Entire Villa • 7 Rooms',
+				type: 'Luxury Villa Indu Siam',
+				price: '$350/night',
+				rating: 4,
+				reviews: '37 Reviews'
+			}
+		]
+	}
 	render () {
 		return (
 			<body>
@@ -17,26 +30,7 @@ class Confirm extends React.Component {
 				<div className="grid medium">
 					<div className="grid sidebar-left">
 						<div className="sidebar">
-							<div className="card link">
-								<div className="image" style={{backgroundImage: `(${'https://q-ak.bstatic.com/images/hotel/max1024x768/186/186223203.jpg'})`}}>
-									<button className="icon">
-										<i className="far fa-heart"></i>
-									</button>
-								</div>
-								<div className="content">
-									<small className="meta">Entire Villa • 7 Rooms</small>
-									<h2>Luxury Villa Indu Siam</h2>
-									<span className="price">$350/night</span>
-									<span className="rating">
-										<i className="fas fa-star"></i>
-										<i className="fas fa-star"></i>
-										<i className="fas fa-star"></i>
-										<i className="fas fa-star"></i>
-										<i className="far fa-star"></i>
-										<span>37 Reviews</span>
-									</span>
-								</div>
-							</div>
+							{this.state.place.map(place => <Thumbnail place={place}/>)}
 						</div>
 						<div className="content">
 							<h2>Confirm Booking</h2>

@@ -1,15 +1,16 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 
 class Nav extends React.Component {
 	render () {
 		return (
 			<nav>
-				<a href="index.html" className="logo" style={{backgroundImage: `url(${'../images/logo-airbnb.png'})`}}></a>
+				<Link to="/index" className="logo" style={{backgroundImage: `url(${'../images/logo-airbnb.png'})`}}></Link>
 				<div className="profile">
-					<a href="profile.html" className="button">
+					<Link to="/profile" className="button">
 						<div className="avatar" style={{backgroundImage: `url(${'https://randomuser.me/api/portraits/men/9.jpg'})`}}></div>
 						<span>Tony</span>
-					</a>
+					</Link>
 				</div>
 			</nav>
 		)

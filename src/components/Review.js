@@ -13,11 +13,8 @@ class Review extends React.Component {
 						</div>
 					</div>
 					<div className="rating">
-						<i className="fas fa-star"></i>
-						<i className="fas fa-star"></i>
-						<i className="fas fa-star"></i>
-						<i className="fas fa-star"></i>
-						<i className="fas fa-star"></i>
+						{[...Array(this.props.user.rating)].map(rating => <i className="fas fa-star"></i>)}
+						{[...Array(5-this.props.user.rating)].map(rating => <i className="far fa-star"></i>)}
 					</div>
 					<p>{this.props.user.review}</p>
 				</div>

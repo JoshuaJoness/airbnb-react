@@ -10,13 +10,16 @@ import Nav from './Nav'
 import Sidebar from './Sidebar'
 
 class Profile extends React.Component {
+	state = {
+		activePage: 'Profile'
+	}
 	render () {
 		return (
 			<body>
 				<Nav />
 				<div className="grid medium">
 					<div className="grid sidebar-left">
-						<Sidebar />
+						<Sidebar activePage={this.state.activePage} />
 						<div className="content">
 							<h2>My Profile</h2>
 							<form>

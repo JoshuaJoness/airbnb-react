@@ -8,69 +8,47 @@ import '../styles/sidebar.css'
 import '../styles/icons.css'
 import Nav from './Nav'
 import Sidebar from './Sidebar'
+import Thumbnail from './Thumbnail'
+import {Link} from 'react-router-dom'
 
 
 class Host extends React.Component {
+	state = {
+		places: [
+			{
+				image:'https://q-ak.bstatic.com/images/hotel/max1024x768/186/186223203.jpg',
+					decription: 'Entire Villa • 3 Rooms',
+					type:'Luxury Villa Indu Siam',
+					location:'Koh Samui, Thailand',
+					price: '$198/night',
+					rating: 4,
+					reviews:'29 Reviews',
+			},
+			{
+				image:'https://a0.muscache.com/4ea/air/v2/pictures/eee424d0-ca05-4405-8bdb-e5caf2db3fbe.jpg',
+					decription: 'Entire House • 1 Room',
+					type:'Dreamy Tropical Tree House',
+					location:'Hilo Forest, Hawaii',
+					price: '$120/night',
+					rating: 5,
+					reviews:'127 Reviews',
+			},
+		],
+		activePage: 'Host'
+	}
 	render () {
 		return (
 			<body>
 				<Nav />
 				<div className="grid medium">
 					<div className="grid sidebar-left">
-						<Sidebar />
+						<Sidebar activePage={this.state.activePage} />
 						<div className="content">
-							<a className="button primary" href="create.html">Host new place</a>
+							<Link className="button primary" to="/create">Host new place</Link>
 							<hr />
 							<h2>Places I'm hosting</h2>
 							<div className="grid two">
-								<a className="card link" href="place.html">
-									<div className="image" style={{backgroundImage: `url(${'https://q-ak.bstatic.com/images/hotel/max1024x768/186/186223203.jpg'})`}}>
-										<button className="icon">
-											<i className="far fa-heart"></i>
-										</button>
-									</div>
-									<div className="content">
-										<small className="meta">Entire Villa • 3 Rooms</small>
-										<h2>Luxury Villa Indu Siam</h2>
-										<small className="location">
-											<i className="fas fa-map-marker-alt"></i>
-											<span>Koh Samui, Thailand</span>
-										</small>
-										<span className="price">$198/night</span>
-										<span className="rating">
-											<i className="fas fa-star"></i>
-											<i className="fas fa-star"></i>
-											<i className="fas fa-star"></i>
-											<i className="fas fa-star"></i>
-											<i className="far fa-star"></i>
-											<span>29 Reviews</span>
-										</span>
-									</div>
-								</a>
-								<a className="card link" href="place.html">
-									<div className="image" style={{backgroundImage: `url(${'https://a0.muscache.com/4ea/air/v2/pictures/eee424d0-ca05-4405-8bdb-e5caf2db3fbe.jpg'})`}}>
-										<button className="icon">
-											<i className="far fa-heart"></i>
-										</button>
-									</div>
-									<div className="content">
-										<small className="meta">Entire House • 1 Room</small>
-										<h2>Dreamy Tropical Tree House</h2>
-										<small className="location">
-											<i className="fas fa-map-marker-alt"></i>
-											<span>Hilo Forest, Hawaii</span>
-										</small>
-										<span className="price">$120/night</span>
-										<span className="rating">
-											<i className="fas fa-star"></i>
-											<i className="fas fa-star"></i>
-											<i className="fas fa-star"></i>
-											<i className="fas fa-star"></i>
-											<i className="fas fa-star"></i>
-											<span>127 Reviews</span>
-										</span>
-									</div>
-								</a>
+								{this.state.places.map(place => <Thumbnail place={place}/>)}
 							</div>
 						</div>
 					</div>

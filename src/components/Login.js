@@ -4,6 +4,7 @@ import '../styles/buttons.css'
 import '../styles/cards.css'
 import '../styles/forms.css'
 import '../styles/grid.css'
+import {Link} from 'react-router-dom'
 
 class Login extends React.Component {
 	render () {
@@ -25,7 +26,7 @@ class Login extends React.Component {
 								<button className="primary">Login</button>
 							</form>
 							<p className="footer">
-								New to Airbnb? <a href="">Signup</a>
+								New to Airbnb? <Link to="/Signup">Signup</Link>
 							</p>
 						</div>
 					</div>

@@ -4,6 +4,7 @@ import '../styles/buttons.css'
 import '../styles/cards.css'
 import '../styles/forms.css'
 // import '../styles/stylesheet.css'
+import {Link} from 'react-router-dom'
 
 class Signup extends React.Component {
 	render () {
@@ -37,7 +38,7 @@ class Signup extends React.Component {
 								<button className="primary">Signup</button>
 							</form>
 							<p className="footer">
-								Already have an account? <a href="">Login</a>
+								Already have an account? <Link to="/Login">Login</Link>
 							</p>
 						</div>
 					</div>

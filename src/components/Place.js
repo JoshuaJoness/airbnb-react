@@ -53,9 +53,7 @@ class Place extends React.Component {
 		return (
 			<body>
 				<Nav />
-				{
-				this.state.images.map(images => <Gallery images={images}/>)
-				}
+				<Gallery images={this.state.images}/>
 				<div className="grid medium">
 					<div className="grid sidebar-right">
 						<div className="content">
