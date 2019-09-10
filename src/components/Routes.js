@@ -11,6 +11,7 @@ import Create from './Create'
 import Confirm from './Confirm'
 import Bookings from './Bookings'
 import Thumbnail from './Thumbnail'
+import Places from './Places'
 
 
 
@@ -24,6 +25,7 @@ class Routes extends React.Component {
 								<Route path ='/profile' component={Profile} />
 								<Route path ='/confirm' component={Confirm} />
 								<Route path ='/create' component={Create} />
+								<Route path ='/places' component={Places} />
 								<Route path ='/login' component={Login} />
 								<Route path = '/place' component={Place} />
 								<Route path = '/host' component={Host} />
