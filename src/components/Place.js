@@ -15,29 +15,12 @@ import Nav from './Nav'
 import Gallery from './Gallery'
 import Review from './Review'
 
+import axios from 'axios'
+
 class Place extends React.Component {
 	state = {
-		reviews: [{avatar: 'https://randomuser.me/api/portraits/women/3.jpg',
-								date: '27 July 2019',
-								name: 'Amanda',
-								rating: 5,
-								review:'It was beyond my imagination that my AirBnB experience could be better than a 5 star resort hotel. It is one of the most beautiful villa that I have had stayed so far in the many countries travelled so far. The pictures have not sufficiently described the details of the place.' },
-							{avatar: 'https://randomuser.me/api/portraits/men/4.jpg',
-								date: '22 July 2019',
-								name: 'John',
-								rating: 3,
-								review:'It was beyond my imagination that my AirBnB experience could be better than a 5 star resort hotel. It is one of the most beautiful villa that I have had stayed so far in the many countries travelled so far. The pictures have not sufficiently described the details of the place.' },
-							{avatar: 'https://randomuser.me/api/portraits/men/5.jpg',
-								date: '4 July 2019',
-								name: 'Sam',
-								rating: 4,
-								review:'It was beyond my imagination that my AirBnB experience could be better than a 5 star resort hotel. It is one of the most beautiful villa that I have had stayed so far in the many countries travelled so far. The pictures have not sufficiently described the details of the place.' },
-							{avatar: 'https://randomuser.me/api/portraits/women/7.jpg',
-								date: '27 May 2019',
-								name: 'Ella',
-								rating: 5,
-								review:'It was beyond my imagination that my AirBnB experience could be better than a 5 star resort hotel. It is one of the most beautiful villa that I have had stayed so far in the many countries travelled so far. The pictures have not sufficiently described the details of the place.' }
-							],
+		place: {},
+		reviews: [],
 		images: ['https://q-ak.bstatic.com/images/hotel/max1024x768/186/186223203.jpg',
 		 					'https://q-ak.bstatic.com/images/hotel/max1280x900/186/186223171.jpg',
 							'https://r-ak.bstatic.com/images/hotel/max1280x900/186/186223174.jpg',
@@ -49,6 +32,19 @@ class Place extends React.Component {
 							'https://q-ak.bstatic.com/images/hotel/max1280x900/186/186223199.jpg'
 		]
 	}
+
+	componentWillMount() {
+		axios.get('http://localhost:4000/reviews/5d75e1006bde2543303f832f')
+		.then(res => {
+			console.log(res.data)
+			this.setState({
+				reviews: res.data
+			})
+		}).catch(err => {
+			console.log(err)
+		})
+	}
+
 	render () {
 		return (
 			<body>
@@ -57,7 +53,7 @@ class Place extends React.Component {
 				<div className="grid medium">
 					<div className="grid sidebar-right">
 						<div className="content">
-							<h1>Luxury Villa Indu Siam</h1>
+							<h1>{this.state.place.title}</h1>
 							<small>
 								<i className="fas fa-map-marker-alt"></i>
 								<span>Koh Samui, Thailand</span>
@@ -66,7 +62,7 @@ class Place extends React.Component {
 								<div className="avatar" style={{backgroundImage: `url(${'https://randomuser.me/api/portraits/women/2.jpg'})`}}></div>
 								<div className="name">
 									<small>Hosted by</small>
-									<span>Kitty</span>
+									<span>host's name</span>
 								</div>
 							</div>
 							<div className="card specs">
@@ -95,7 +91,7 @@ class Place extends React.Component {
 								</div>
 							</div>
 							<div className="reviews">
-								<h2>4 Reviews</h2>
+								<h2>{this.state.reviews.length} Reviews</h2>
 								<form>
 									<div className="group">
 										<label>Leave a review</label>
@@ -111,21 +107,21 @@ class Place extends React.Component {
 									</div>
 								</form>
 								{
-								this.state.reviews.map((user,i) => <Review key={i} user={user}/>)
+								this.state.reviews.map((review,i) => <Review key={i} avatar={review.author.avatar} author={review.author} content={review.content} date={review.date}/>)
 								}
 							</div>
 						</div>
 						<div className="sidebar booking">
 							<div className="card shadow">
 								<div className="content large">
-									<h3>$350<small>per night</small></h3>
+									<h3>${this.state.place.price}<small>per night</small></h3>
 									<small>
 										<i className="fas fa-star"></i>
 										<i className="fas fa-star"></i>
 										<i className="fas fa-star"></i>
 										<i className="fas fa-star"></i>
 										<i className="far fa-star"></i>
-										<span>4 Reviews</span>
+										<span>{this.state.reviews.length} Reviews</span>
 									</small>
 									<form className="small">
 										<div className="group">

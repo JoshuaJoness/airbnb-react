@@ -17,7 +17,8 @@ class Places extends React.Component {
 		.then(res => {
 			console.log(res.data)
 			this.setState({
-				places: res.data
+				places: res.data,
+				originalPlaces: res.data
 			})
 		}).catch(err => {
 			console.log(err)
@@ -36,8 +37,22 @@ class Places extends React.Component {
 
 	state = {
 		places:[],
+		originalPlaces:[],
 		types:[]
 	}
+
+	filterByType = (event) => {
+		let filteredPlaces
+
+		if (event.target.value === '1') {
+				console.log(event.target.value);
+			filteredPlaces = this.state.originalPlaces
+		} else {
+			filteredPlaces = this.state.originalPlaces.filter(place => place.type._id === event.target.value )
+		}
+		this.setState({places: filteredPlaces})
+	}
+
 	render () {
 		return (
 			<body>
@@ -55,9 +70,10 @@ class Places extends React.Component {
 						<option value="1">Rooms: 9</option>
 						<option value="1">Rooms: 10</option>
 					</select>
-					<select>
+					<select onChange={this.filterByType}>
+						<option value="1">All Types</option>
 						{
-							this.state.types.map((type,i) => <option value={i} key={i}>{type.name}</option>)
+							this.state.types.map(type => <option value={type._id} >{type.name}</option>)
 						}
 					</select>
 					<input type="number" placeholder="max price" />
