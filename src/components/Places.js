@@ -15,16 +15,28 @@ class Places extends React.Component {
 	componentWillMount() {
 		axios.get('http://localhost:4000/places')
 		.then(res => {
-			console.log(res.data);
+			console.log(res.data)
 			this.setState({
 				places: res.data
 			})
 		}).catch(err => {
 			console.log(err)
 		})
+		axios.get('http://localhost:4000/types')
+		.then(res => {
+			console.log(res.data)
+			this.setState({
+				types: res.data
+			})
+		}).catch(err => {
+			console.log(err)
+		})
 	}
+
+
 	state = {
-		places:[]
+		places:[],
+		types:[]
 	}
 	render () {
 		return (
@@ -44,12 +56,9 @@ class Places extends React.Component {
 						<option value="1">Rooms: 10</option>
 					</select>
 					<select>
-						<option value="1">All Types</option>
-						<option value="1">Entire Villa</option>
-						<option value="1">Shared Villa</option>
-						<option value="1">Entire House</option>
-						<option value="1">Shared House</option>
-						<option value="1">Private Room</option>
+						{
+							this.state.types.map((type,i) => <option value={i} key={i}>{type.name}</option>)
+						}
 					</select>
 					<input type="number" placeholder="max price" />
 					<select>
