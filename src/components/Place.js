@@ -16,27 +16,30 @@ import Gallery from './Gallery'
 import Review from './Review'
 
 import axios from 'axios'
+import moment from 'moment'
 
 class Place extends React.Component {
 	state = {
-		place: {},
-		reviews: [],
-		images: ['https://q-ak.bstatic.com/images/hotel/max1024x768/186/186223203.jpg',
-		 					'https://q-ak.bstatic.com/images/hotel/max1280x900/186/186223171.jpg',
-							'https://r-ak.bstatic.com/images/hotel/max1280x900/186/186223174.jpg',
-							'https://r-ak.bstatic.com/images/hotel/max1280x900/186/186223178.jpg',
-							'https://q-ak.bstatic.com/images/hotel/max1280x900/186/186223180.jpg',
-							'https://q-ak.bstatic.com/images/hotel/max1280x900/186/186223186.jpg',
-							'https://r-ak.bstatic.com/images/hotel/max1280x900/186/186223190.jpg',
-							'https://q-ak.bstatic.com/images/hotel/max1280x900/186/186223195.jpg',
-							'https://q-ak.bstatic.com/images/hotel/max1280x900/186/186223199.jpg'
-		]
+		place: {
+			amenities:[],
+			host:{
+				avatar:'',
+				name:'',
+				_id:''
+			},
+			images:[],
+			type:{
+				name:'',
+				_id:''
+			},
+			reviews: []
+		}
 	}
 
 	componentWillMount() {
 		axios.get(`http://localhost:4000/places/${this.props.match.params.id}`)
 		.then(res => {
-			console.log(res.data)
+			console.log('data', res.data)
 			this.setState({
 				place: res.data
 			})
@@ -47,9 +50,9 @@ class Place extends React.Component {
 
 	render () {
 		return (
-			<body>
+			<>
 				<Nav />
-				<Gallery images={this.state.images}/>
+				<Gallery images={this.state.place.images}/>
 				<div className="grid medium">
 					<div className="grid sidebar-right">
 						<div className="content">
@@ -59,39 +62,33 @@ class Place extends React.Component {
 								<span>{this.state.place.city}, {this.state.place.country}</span>
 							</small>
 							<div className="user">
-								<div className="avatar" style={{backgroundImage: `url(${'https://randomuser.me/api/portraits/women/2.jpg'})`}}></div>
+								<div className="avatar" style={{backgroundImage: this.state.place.host.avatar}}></div>
 								<div className="name">
 									<small>Hosted by</small>
-									<span>host's name</span>
+									<span>{this.state.place.host.name}</span>
 								</div>
 							</div>
 							<div className="card specs">
 								<div className="content">
 									<ul className="grid two">
-										<li><i class="fas fa-fw fa-home"></i>Entire Villa</li>
-										<li><i class="fas fa-fw fa-user-friends"></i>10 guests</li>
-										<li><i class="fas fa-fw fa-bed"></i>7 bedrooms</li>
-										<li><i class="fas fa-fw fa-bath"></i>6 baths</li>
+										<li><i className="fas fa-fw fa-home"></i>{this.state.place.type.name}</li>
+										<li><i className="fas fa-fw fa-user-friends"></i>{this.state.place.guests} guests</li>
+										<li><i className="fas fa-fw fa-bed"></i>{this.state.place.bedrooms}</li>
+										<li><i className="fas fa-fw fa-bath"></i>{this.state.place.bathrooms} baths</li>
 									</ul>
 								</div>
 							</div>
-							<p>Stylish, tropical, luxurious, airy and absolute beach front, this villa combines form and function, enjoying magnificent views of Samui’s small islands and the sea beyond. With 520sqm of indoor/outdoor living space with 5 ensuite bedrooms, large living area, beachfront infinity pool, garden, air conditioned gym, professional pool table, bbq and Sala, this villa is perfect for up to 10 adults With 260sqm (2798sqfeet) of living space and 250sqm (2,700sqfeet) of outdoor space.</p>
+							<p>{this.state.place.description}</p>
 							<h3>Amenities</h3>
 							<div className="card specs">
 								<div className="content">
 									<ul className="grid two">
-										<li><i className="fas fa-utensils"></i>Kitchen</li>
-										<li><i className="fas fa-dumbbell"></i>Gym</li>
-										<li><i className="fas fa-dumbbell"></i>Wi-Fi</li>
-										<li><i className="fas fa-tshirt"></i>Iron</li>
-										<li><i className="fas fa-swimmer"></i>Swimming Pool</li>
-										<li><i className="fas fa-wind"></i>Air Conditioning</li>
-										<li><i className="fas fa-tv"></i>TV</li>
+										{this.state.place.amenities.map(a => <li><i className={a.icon}></i>{a.name}</li>)}
 									</ul>
 								</div>
 							</div>
 							<div className="reviews">
-								<h2>{this.state.reviews.length} Reviews</h2>
+								<h2>{this.state.place.reviews.length} Reviews</h2>
 								<form>
 									<div className="group">
 										<label>Leave a review</label>
@@ -107,7 +104,7 @@ class Place extends React.Component {
 									</div>
 								</form>
 								{
-								this.state.reviews.map((review,i) => <Review key={i} avatar={review.author.avatar} author={review.author} content={review.content} date={review.date}/>)
+								this.state.place.reviews.map((review,i) => <Review key={i} avatar={review.avatar} author={review.author} content={review.content} date={moment(review.date).format('D MMMM YYYY')}/>)
 								}
 							</div>
 						</div>
@@ -121,7 +118,7 @@ class Place extends React.Component {
 										<i className="fas fa-star"></i>
 										<i className="fas fa-star"></i>
 										<i className="far fa-star"></i>
-										<span>{this.state.reviews.length} Reviews</span>
+										<span>{this.state.place.reviews.length} Reviews</span>
 									</small>
 									<form className="small">
 										<div className="group">
@@ -153,7 +150,7 @@ class Place extends React.Component {
 						</div>
 					</div>
 				</div>
-			</body>
+			</>
 		)
 	}
 }
