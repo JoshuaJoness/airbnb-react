@@ -34,11 +34,11 @@ class Place extends React.Component {
 	}
 
 	componentWillMount() {
-		axios.get('http://localhost:4000/reviews/5d75e1006bde2543303f832f')
+		axios.get(`http://localhost:4000/places/${this.props.match.params.id}`)
 		.then(res => {
 			console.log(res.data)
 			this.setState({
-				reviews: res.data
+				place: res.data
 			})
 		}).catch(err => {
 			console.log(err)
@@ -56,7 +56,7 @@ class Place extends React.Component {
 							<h1>{this.state.place.title}</h1>
 							<small>
 								<i className="fas fa-map-marker-alt"></i>
-								<span>Koh Samui, Thailand</span>
+								<span>{this.state.place.city}, {this.state.place.country}</span>
 							</small>
 							<div className="user">
 								<div className="avatar" style={{backgroundImage: `url(${'https://randomuser.me/api/portraits/women/2.jpg'})`}}></div>

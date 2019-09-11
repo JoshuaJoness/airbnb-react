@@ -27,7 +27,7 @@ class Routes extends React.Component {
 								<Route path ='/create' component={Create} />
 								<Route path ='/places' component={Places} />
 								<Route path ='/login' component={Login} />
-								<Route path = '/place' component={Place} />
+								<Route path = '/place/:id' component={Place} />
 								<Route path = '/host' component={Host} />
 								<Route path ='/' component={Signup} />
 							</Switch>
