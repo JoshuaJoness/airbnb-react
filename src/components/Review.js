@@ -9,7 +9,7 @@ class Review extends React.Component {
 						<div className="avatar" style={{backgroundImage: `url(${this.props.avatar})`}}></div>
 						<div className="name">
 							<small>{this.props.date}</small>
-							<span>{this.props.author.name}</span>
+							<span>{this.props.author}</span>
 						</div>
 					</div>
 

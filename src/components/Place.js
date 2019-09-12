@@ -10,6 +10,9 @@ import '../styles/reviews.css'
 import '../styles/sidebar.css'
 import '../styles/buttons.css'
 import '../styles/forms.css'
+import "react-datepicker/dist/react-datepicker.css"
+
+import {BrowserRouter, Switch, Route} from 'react-router-dom'
 
 import Nav from './Nav'
 import Gallery from './Gallery'
@@ -17,6 +20,8 @@ import Review from './Review'
 
 import axios from 'axios'
 import moment from 'moment'
+import DatePicker from "react-datepicker"
+
 
 class Place extends React.Component {
 	state = {
@@ -33,13 +38,16 @@ class Place extends React.Component {
 				_id:''
 			},
 			reviews: []
-		}
+		},
+		startDate: '',
+		endDate: ''
 	}
 
-	componentWillMount() {
+	UNSAFE_componentWillMount() {
 		axios.get(`http://localhost:4000/places/${this.props.match.params.id}`)
 		.then(res => {
 			console.log('data', res.data)
+			console.log('date', this.date)
 			this.setState({
 				place: res.data
 			})
@@ -47,6 +55,29 @@ class Place extends React.Component {
 			console.log(err)
 		})
 	}
+
+//each page has its own state, they're seperate not child and parent
+//in order to pass props to the route we're going // TODO:
+//react router dom feautures this.props.hisotry.push
+//after passing path, pass the data that you want to send
+
+	bookPlace = (e) => {
+		e.preventDefault()
+			this.props.history.push({
+				pathname: `/Confirm`,
+				place: this.state.place,
+				checkIn: this.state.startDate,
+			})
+	}
+
+	handleChangeStart = (date) => {
+		this.setState({startDate: date})
+	}
+
+	handleChangeEnd = (date) => {
+		this.setState({endDate: date})
+	}
+
 
 	render () {
 		return (
@@ -83,7 +114,7 @@ class Place extends React.Component {
 							<div className="card specs">
 								<div className="content">
 									<ul className="grid two">
-										{this.state.place.amenities.map(a => <li><i className={a.icon}></i>{a.name}</li>)}
+										{this.state.place.amenities.map(a => <li key={a._id}><i key={a._id} className={a.icon}></i>{a.name}</li>)}
 									</ul>
 								</div>
 							</div>
@@ -104,7 +135,7 @@ class Place extends React.Component {
 									</div>
 								</form>
 								{
-								this.state.place.reviews.map((review,i) => <Review key={i} avatar={review.avatar} author={review.author} content={review.content} date={moment(review.date).format('D MMMM YYYY')}/>)
+								this.state.place.reviews.map((review,i) => <Review key={i} avatar={review.author.avatar} author={review.author.name} content={review.content} date={moment(review.date).format('D MMMM YYYY')}/>)
 								}
 							</div>
 						</div>
@@ -122,9 +153,22 @@ class Place extends React.Component {
 									</small>
 									<form className="small">
 										<div className="group">
+
+
+
+
+
 											<label>Dates</label>
-											<input type="text" placeholder="Check-in" />
-											<input type="text" placeholder="Check-out" />
+												<DatePicker
+													placeholderText="Check-in"
+													selected={this.state.startDate} //date from the start
+													onChange={this.handleChangeStart} //calls function
+													/>
+												<DatePicker
+													placeholderText="Check-out"
+													selected={this.state.endDate}
+													onChange={this.handleChangeEnd}
+												/>
 										</div>
 										<div className="group">
 											<label>Guests</label>
@@ -141,8 +185,11 @@ class Place extends React.Component {
 												<option>10 guests</option>
 											</select>
 										</div>
+
+
+
 										<div className="group">
-											<button className="secondary full">Book this place</button>
+											<button className="secondary full" onClick={this.bookPlace}>Book this place</button>
 										</div>
 									</form>
 								</div>
