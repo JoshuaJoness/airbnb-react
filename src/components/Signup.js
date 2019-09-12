@@ -30,15 +30,19 @@ class Signup extends React.Component {
 	signup = (e) => {
 		e.preventDefault()
 		let user = this.state.user
-		axios.post("http://localhost:4000/signup",
+		if (user.email && user.location && user.name && user.password)
+		{	axios.post("http://localhost:4000/signup",
 			this.state.user
 		).then(res => {
 			console.log('data', res.data)
 			localStorage.setItem('token', res.data)
 			this.props.history.push("/")
-		}
-	)
+			}
+		)
+	} else {
+		console.log('error');
 	}
+}
 
 	render () {
 		return (
