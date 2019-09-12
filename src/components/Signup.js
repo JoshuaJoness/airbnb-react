@@ -4,6 +4,7 @@ import '../styles/buttons.css'
 import '../styles/cards.css'
 import '../styles/forms.css'
 // import '../styles/stylesheet.css'
+import {BrowserRouter, Switch, Route, Redirect} from 'react-router-dom'
 import {Link} from 'react-router-dom'
 import axios from 'axios'
 
@@ -33,6 +34,7 @@ class Signup extends React.Component {
 			this.state.user
 		).then(res => {
 			console.log('data', res.data)
+			this.props.history.push("/")
 		}
 	)
 	}
@@ -44,6 +46,8 @@ class Signup extends React.Component {
 					<div className="card small">
 						<div className="content">
 							<div className="logo" style={{backgroundImage: `url(${'../images/logo-airbnb.png'})`}}></div>
+
+							//put the onSubmit in the form as opposed to the button, why?
 							<form onSubmit={this.signup}>
 								<div className="group">
 									<label>Name</label>
