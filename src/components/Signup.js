@@ -29,9 +29,12 @@ class Signup extends React.Component {
 	signup = (e) => {
 		e.preventDefault()
 		let user = this.state.user
-		axios.post('http://localhost:4000/signup', {
-			user
-		})
+		axios.post("http://localhost:4000/signup",
+			this.state.user
+		).then(res => {
+			console.log('data', res.data)
+		}
+	)
 	}
 
 	render () {
@@ -41,7 +44,7 @@ class Signup extends React.Component {
 					<div className="card small">
 						<div className="content">
 							<div className="logo" style={{backgroundImage: `url(${'../images/logo-airbnb.png'})`}}></div>
-							<form>
+							<form onSubmit={this.signup}>
 								<div className="group">
 									<label>Name</label>
 									<input type="text" onChange={(e)=>this.changeField(e,'name')}/>
@@ -62,7 +65,7 @@ class Signup extends React.Component {
 									<label>Profile Picture</label>
 									<input type="file"/>
 								</div>
-								<button className="primary" onClick={this.signup}>Signup</button>
+								<button className="primary">Signup</button>
 							</form>
 							<p className="footer">
 								Already have an account? <Link to="/Login">Login</Link>
