@@ -23,6 +23,7 @@ class Signup extends React.Component {
 		let user = this.state.user
 		user[field] = e.target.value
 		this.setState({user})
+		console.log(this.state.user);
 	}
 
 	signup = (e) => {
