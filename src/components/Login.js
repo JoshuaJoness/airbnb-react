@@ -6,7 +6,37 @@ import '../styles/forms.css'
 import '../styles/grid.css'
 import {Link} from 'react-router-dom'
 
+import axios from 'axios'
+
 class Login extends React.Component {
+
+	state={
+		user:{
+			email:'',
+			password:''
+		}
+	}
+
+	logIntoPage = (e) => {
+		e.preventDefault()
+		let user = this.state.user
+		if (user.email && user.password) {
+			axios.post("http://localhost:4000/login",
+			this.state.user
+		)
+	} else {
+		console.log('error');
+	}
+
+	}
+
+	changeField = (e, field) => {
+		let user = this.state.user
+		user[field] = e.target.value
+		this.setState({user})
+		console.log(this.state.user);
+	}
+
 	render () {
 		return (
 			<body>
@@ -14,14 +44,16 @@ class Login extends React.Component {
 					<div className="card small">
 						<div className="content">
 							<div className="logo" style={{backgroundImage: `url(${'../images/logo-airbnb.png'})`}}></div>
-							<form>
+
+
+							<form onSubmit={this.logIntoPage}>
 								<div className="group">
 									<label>Email</label>
-									<input type="email" />
+									<input type="email" onChange={(e)=>this.changeField(e, 'email')}/>
 								</div>
 								<div className="group">
 									<label>Password</label>
-									<input type="password" />
+									<input type="password" onChange={(e)=>this.changeField(e, 'password')}/>
 								</div>
 								<button className="primary">Login</button>
 							</form>
