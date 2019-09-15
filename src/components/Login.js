@@ -20,15 +20,20 @@ class Login extends React.Component {
 	logIntoPage = (e) => {
 		e.preventDefault()
 		let user = this.state.user
-		if (user.email && user.password) {
-			axios.post("http://localhost:4000/login",
-			this.state.user
-		)
-	} else {
-		console.log('error');
-	}
+		if (user.email && user.password)
+		{ axios.post("http://localhost:4000/login",
+			user
+		).then(res => {
+		console.log('data', res.data)
+		localStorage.setItem('token', res.data.token)
+		this.props.history.push("/")
+		}
+	)
+} else {
+	alert('Please complete all the fields.')
+}
+}
 
-	}
 
 	changeField = (e, field) => {
 		let user = this.state.user
