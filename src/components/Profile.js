@@ -13,6 +13,12 @@ class Profile extends React.Component {
 	state = {
 		activePage: 'Profile'
 	}
+
+	logout = () => {
+		localStorage.removeItem('token')
+		this.props.history.push("/login")
+	}
+
 	render () {
 		return (
 			<body>
@@ -47,7 +53,7 @@ class Profile extends React.Component {
 								<button>Save Changes</button>
 							</form>
 							<hr />
-							<button className="secondary">Logout</button>
+							<button className="secondary" onClick={this.logout}>Logout</button>
 						</div>
 					</div>
 				</div>
