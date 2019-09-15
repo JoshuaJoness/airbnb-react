@@ -27,8 +27,8 @@ class Thumbnail extends React.Component {
 					</small>
 					<span className="price">${this.props.place.price}/night</span>
 					<span className="rating">
-						{[...Array(this.props.place.rating)].map(rating => <i className="fas fa-star"></i>)}
-						{[...Array(5-this.props.place.rating)].map(rating => <i className="far fa-star"></i>)}
+						{[...Array(this.props.place.rating)].map((rating,i) => <i key={i} className="fas fa-star"></i>)}
+						{[...Array(5-this.props.place.rating)].map((rating,i) => <i key={i} className="far fa-star"></i>)}
 						<span>{this.props.place.reviews} Reviews</span>
 					</span>
 					{this.renderDates()}

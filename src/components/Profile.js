@@ -10,6 +10,15 @@ import Nav from './Nav'
 import Sidebar from './Sidebar'
 
 class Profile extends React.Component {
+
+	componentWillMount() {
+		if (localStorage.getItem('token')){
+			this.props.history.push("/create")
+		} else {
+			this.props.history.push("/")
+		}
+	}
+
 	state = {
 		activePage: 'Profile'
 	}

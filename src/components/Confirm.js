@@ -31,6 +31,7 @@ class Confirm extends React.Component {
 	}
 
 	componentWillMount() {
+		if (localStorage.getItem('token')){
 			console.log(this.props.location.place)
 			let place = {
 				reviews: this.props.location.place.reviews.length
@@ -44,7 +45,10 @@ class Confirm extends React.Component {
 				console.log('>>>>>>>>>>>>>>>', this.state);
 				}
 			)
+		} else {
+			this.props.history.push("/")
 		}
+	}
 
 	render () {
 		return (

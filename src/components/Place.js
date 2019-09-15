@@ -48,17 +48,21 @@ class Place extends React.Component {
 	//to add review .then(res) state->place->reviews -> add res.data to top of array -> set state pf place:place(reviews) review_content: '', review_rating: 0 (to reset these 2), in postreviews you have to search the database for the user name and avatar : Review.findById(data._id).populate('author').then(review) => { res.send(review)}
 
 	UNSAFE_componentWillMount() {
-		axios.get(`http://localhost:4000/places/${this.props.match.params.id}`)
-		.then(res => {
-			console.log('data', res.data)
-			console.log('date', this.date)
-			this.setState({
-				place: res.data
-			})
-		}).catch(err => {
-			console.log(err)
-		})
-	}
+			if (localStorage.getItem('token')){
+				axios.get(`http://localhost:4000/places/${this.props.match.params.id}`)
+				.then(res => {
+					console.log('data', res.data)
+					console.log('date', this.date)
+					this.setState({
+						place: res.data
+					})
+				}).catch(err => {
+					console.log(err)
+				})
+			} else {
+				this.props.history.push("/")
+			}
+		}
 
 //each page has its own state, they're seperate not child and parent
 //in order to pass props to the route we're going // TODO:

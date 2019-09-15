@@ -43,6 +43,15 @@ class Bookings extends React.Component {
 		],
 		activePage: 'Bookings'
 	}
+
+	componentWillMount() {
+		if (localStorage.getItem('token')){
+			this.props.history.push("/bookings")
+		} else {
+			this.props.history.push("/")
+		}
+	}
+
 	render () {
 		return (
 			<body>

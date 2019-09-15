@@ -36,6 +36,15 @@ class Host extends React.Component {
 		],
 		activePage: 'Host'
 	}
+
+	componentWillMount() {
+		if (localStorage.getItem('token')){
+			this.props.history.push("/host")
+		} else {
+			this.props.history.push("/")
+		}
+	}
+
 	render () {
 		return (
 			<body>

@@ -26,6 +26,15 @@ class Favorites extends React.Component {
 			}
 		]
 	}
+
+	componentWillMount() {
+		if (localStorage.getItem('token')){
+			this.props.history.push("/favorites")
+		} else {
+			this.props.history.push("/")
+		}
+	}
+
 	render () {
 		return (
 			<body>

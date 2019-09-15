@@ -40,7 +40,7 @@ class Signup extends React.Component {
 			}
 		)
 	} else {
-		console.log('error');
+		alert('Please complete all the fields');
 	}
 }
 

@@ -12,28 +12,32 @@ import Thumbnail from './Thumbnail'
 import axios from 'axios'
 
 class Places extends React.Component {
-	componentWillMount() {
-		axios.get('http://localhost:4000/places')
-		.then(res => {
-			console.log(res.data)
-			this.setState({
-				places: res.data,
-				originalPlaces: res.data
-			})
-		}).catch(err => {
-			console.log(err)
-		})
-		axios.get('http://localhost:4000/types')
-		.then(res => {
-			console.log(res.data)
-			this.setState({
-				types: res.data
-			})
-		}).catch(err => {
-			console.log(err)
-		})
-	}
 
+	componentWillMount() {
+		if (localStorage.getItem('token')){
+			axios.get('http://localhost:4000/places')
+			.then(res => {
+				console.log(res.data)
+				this.setState({
+					places: res.data,
+					originalPlaces: res.data
+				})
+			}).catch(err => {
+				console.log(err)
+			})
+			axios.get('http://localhost:4000/types')
+			.then(res => {
+				console.log(res.data)
+				this.setState({
+					types: res.data
+				})
+			}).catch(err => {
+				console.log(err)
+			})
+		} else {
+			this.props.history.push("/")
+		}
+		} 
 
 	state = {
 		places:[],
