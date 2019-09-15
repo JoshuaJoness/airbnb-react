@@ -43,6 +43,10 @@ class Place extends React.Component {
 		endDate: ''
 	}
 
+	//get token from local storage, populate auth,
+	//content is going to be coming from state, author is user._id, save the id in state
+	//to add review .then(res) state->place->reviews -> add res.data to top of array -> set state pf place:place(reviews) review_content: '', review_rating: 0 (to reset these 2), in postreviews you have to search the database for the user name and avatar : Review.findById(data._id).populate('author').then(review) => { res.send(review)}
+
 	UNSAFE_componentWillMount() {
 		axios.get(`http://localhost:4000/places/${this.props.match.params.id}`)
 		.then(res => {
@@ -67,6 +71,8 @@ class Place extends React.Component {
 				pathname: `/Confirm`,
 				place: this.state.place,
 				checkIn: this.state.startDate,
+				checkOut: this.state.endDate,
+				guests: this.state.place.guests
 			})
 	}
 
@@ -189,7 +195,7 @@ class Place extends React.Component {
 
 
 										<div className="group">
-											<button className="secondary full" onClick={this.bookPlace}>Book this place</button>
+											<button className="secondary full" onClick={this.bookPlace} disabled= {(this.state.startDate ==='' || this.state.endDate==='' ? true : false)}>Book this place</button>
 										</div>
 									</form>
 								</div>
