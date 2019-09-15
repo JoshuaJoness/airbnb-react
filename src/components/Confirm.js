@@ -9,20 +9,43 @@ import '../styles/users.css'
 import '../styles/icons.css'
 import Nav from './Nav'
 import Thumbnail from './Thumbnail'
+import moment from 'moment'
+import {BrowserRouter, Switch, Route} from 'react-router-dom'
 
 class Confirm extends React.Component {
 	state = {
-		place: [
-			{
-				image: 'https://q-ak.bstatic.com/images/hotel/max1024x768/186/186223203.jpg',
-				description: 'Entire Villa • 7 Rooms',
-				type: 'Luxury Villa Indu Siam',
-				price: '$350/night',
-				rating: 4,
-				reviews: '37 Reviews'
+		place: {
+			amenities: [],
+			host: {
+				avatar: '',
+				name: '',
+			},
+			images: [],
+			type: {
+				name:''
 			}
-		]
+		},
+		checkIn:'',
+		checkOut:'',
+		guests: 0
 	}
+
+	componentWillMount() {
+			console.log(this.props.location.place)
+			let place = {
+				reviews: this.props.location.place.reviews.length
+			}
+			this.setState({
+				place: this.props.location.place,
+				checkIn: this.props.location.checkIn,
+				checkOut: this.props.location.checkOut,
+				guests: this.props.location.guests
+			}, ()=>{
+				console.log('>>>>>>>>>>>>>>>', this.state);
+				}
+			)
+		}
+
 	render () {
 		return (
 			<body>
@@ -30,18 +53,18 @@ class Confirm extends React.Component {
 				<div className="grid medium">
 					<div className="grid sidebar-left">
 						<div className="sidebar">
-							{this.state.place.map(place => <Thumbnail place={place}/>)}
+							{/*<Thumbnail place={this.state.place}/>*/}
 						</div>
 						<div className="content">
 							<h2>Confirm Booking</h2>
 							<form>
 								<div className="group">
 									<label>From</label>
-									<input type="text" value="12/11/2019" />
+									<input type="text" value={moment(this.state.checkIn).format('D MMMM YYYY')} />
 								</div>
 								<div className="group">
 									<label>To</label>
-									<input type="text" value="15/11/2019" />
+									<input type="text" value={moment(this.state.checkOut).format('D MMMM YYYY')} />
 								</div>
 								<div className="group">
 									<label>Guests</label>
@@ -65,7 +88,7 @@ class Confirm extends React.Component {
 								<button className="primary">Confirm</button>
 							</form>
 							<hr />
-							<button>Cancel</button>
+							<button onClick={this.props.history.goBack}>Cancel</button>
 						</div>
 					</div>
 				</div>
