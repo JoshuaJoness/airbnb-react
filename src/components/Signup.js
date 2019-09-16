@@ -31,7 +31,7 @@ class Signup extends React.Component {
 		e.preventDefault()
 		let user = this.state.user
 		if (user.email && user.location && user.name && user.password)
-		{	axios.post(`${process.env.REACT_APP_API}}/signup`,
+		{	axios.post(`${process.env.REACT_APP_API}/signup`,
 			this.state.user
 		).then(res => {
 			console.log('data', res.data)
