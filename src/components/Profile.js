@@ -11,27 +11,32 @@ import Sidebar from './Sidebar'
 import axios from 'axios'
 
 class Profile extends React.Component {
-
-	// componentWillMount() {
-	// 	if (localStorage.getItem('token')){
-	// 		this.props.history.push("/create")
-	// 		axios.post(`${${process.env.REACT_APP_API}}/getAuth`,
-	// 			localStorage.getItem('token').then(res => {
-	// 				console.log(res.data)
-	// 				let user = this.state.user
-	// 				user = res.data
-	// 				this.setState({user})
-	// 			})
-	// 		)
-	// 	} else {
-	// 		this.props.history.push("/")
-	// 	}
-	// }
-
 	state = {
 		activePage: 'Profile',
-		user:{}
+		user:{
+			avatar: '',
+			email:'',
+			location:'',
+			name:'',
+			password:''
+		}
 	}
+	componentWillMount() {
+		let token = localStorage.getItem('token')
+		if (token){
+			axios.get(`${process.env.REACT_APP_API}/auth?token=${token}`).then(res => {
+					console.log(res.data)
+					let user = this.state.user
+					user = res.data
+					this.setState({user})
+				}).catch(err => {console.log(err);})
+
+		} else {
+			this.props.history.push("/")
+		}
+	}
+
+
 
 	logout = () => {
 		localStorage.removeItem('token')
@@ -50,20 +55,20 @@ class Profile extends React.Component {
 							<form>
 								<div className="group">
 									<label>Name</label>
-									<input type="text" value="Tony" />
+									<input type="text" value={this.state.user.name} />
 								</div>
 								<div className="group">
 									<label>Email</label>
-									<input type="email" value="tony@tortugacoders.com" />
+									<input type="email" value={this.state.user.email} />
 								</div>
 								<div className="group">
 									<label>Location</label>
-									<input type="text" value="Thailand" />
+									<input type="text" value={this.state.user.location} />
 								</div>
 								<div className="group">
 									<label>Profile Picture</label>
 									<div className="user">
-										<div className="avatar" style={{backgroundImage: `(${'https://randomuser.me/api/portraits/men/9.jpg'})`}}></div>
+										<div className="avatar" style={{backgroundImage: {this.state.user.name}}}></div>
 										<div className="name">
 											<input type="file" />
 										</div>
