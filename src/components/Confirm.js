@@ -86,7 +86,7 @@ class Confirm extends React.Component {
 									</select>
 								</div>
 								<div className="group">
-									<label>Total: 3 nights</label>
+									<label>Total: {moment.duration(moment(this.state.checkOut).diff(moment(this.state.checkIn), 'days'))} nights</label>
 									<h2>$1,050</h2>
 								</div>
 								<button className="primary">Confirm</button>
