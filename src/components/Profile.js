@@ -8,19 +8,29 @@ import '../styles/nav.css'
 import '../styles/users.css'
 import Nav from './Nav'
 import Sidebar from './Sidebar'
+import axios from 'axios'
 
 class Profile extends React.Component {
 
 	componentWillMount() {
 		if (localStorage.getItem('token')){
 			this.props.history.push("/create")
+			axios.post(`${${process.env.REACT_APP_API}}/getAuth`,
+				localStorage.getItem('token').then(res => {
+					console.log(res.data)
+					let user = this.state.user
+					user = res.data
+					this.setState({user})
+				})
+			)
 		} else {
 			this.props.history.push("/")
 		}
 	}
 
 	state = {
-		activePage: 'Profile'
+		activePage: 'Profile',
+		user:{}
 	}
 
 	logout = () => {

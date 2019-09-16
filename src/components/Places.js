@@ -25,7 +25,7 @@ class Places extends React.Component {
 			}).catch(err => {
 				console.log(err)
 			})
-			axios.get('http://localhost:4000/types')
+			axios.get(`${${process.env.REACT_APP_API}}/types`)
 			.then(res => {
 				console.log(res.data)
 				this.setState({
@@ -37,7 +37,7 @@ class Places extends React.Component {
 		} else {
 			this.props.history.push("/")
 		}
-		} 
+		}
 
 	state = {
 		places:[],

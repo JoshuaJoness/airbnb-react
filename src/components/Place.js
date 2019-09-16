@@ -49,7 +49,7 @@ class Place extends React.Component {
 
 	UNSAFE_componentWillMount() {
 			if (localStorage.getItem('token')){
-				axios.get(`http://localhost:4000/places/${this.props.match.params.id}`)
+				axios.get(`${${process.env.REACT_APP_API}}/${this.props.match.params.id}`)
 				.then(res => {
 					console.log('data', res.data)
 					console.log('date', this.date)
