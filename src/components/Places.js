@@ -25,7 +25,7 @@ class Places extends React.Component {
 			}).catch(err => {
 				console.log(err)
 			})
-			axios.get(`${${process.env.REACT_APP_API}}/types`)
+			axios.get(`${process.env.REACT_APP_API}}/types`)
 			.then(res => {
 				console.log(res.data)
 				this.setState({
