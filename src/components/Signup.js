@@ -36,7 +36,7 @@ class Signup extends React.Component {
 		).then(res => {
 			console.log('data', res.data)
 			localStorage.setItem('token', res.data)
-			this.props.history.push("/")
+			this.props.history.push("/places")
 			}
 		)
 	} else {
