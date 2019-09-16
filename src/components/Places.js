@@ -15,7 +15,7 @@ class Places extends React.Component {
 
 	componentWillMount() {
 		if (localStorage.getItem('token')){
-			axios.get('http://localhost:4000/places')
+			axios.get(`${process.env.REACT_APP_API}/places`)
 			.then(res => {
 				console.log(res.data)
 				this.setState({
