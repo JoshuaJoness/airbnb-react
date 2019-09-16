@@ -68,7 +68,7 @@ class Profile extends React.Component {
 								<div className="group">
 									<label>Profile Picture</label>
 									<div className="user">
-										<div className="avatar" style={{backgroundImage: {this.state.user.name}}}></div>
+										<div className="avatar" style={{backgroundImage: this.state.user.name}}></div>
 										<div className="name">
 											<input type="file" />
 										</div>
