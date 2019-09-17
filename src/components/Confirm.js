@@ -11,6 +11,8 @@ import Nav from './Nav'
 import Thumbnail from './Thumbnail'
 import moment from 'moment'
 import {BrowserRouter, Switch, Route} from 'react-router-dom'
+import {Elements, StripeProvider} from 'react-stripe-elements'
+import StripeForm from './StripeForm'
 
 class Confirm extends React.Component {
 	state = {
@@ -32,7 +34,7 @@ class Confirm extends React.Component {
 
 	componentWillMount() {
 		if (localStorage.getItem('token')){
-			console.log(this.props.location.place)
+			console.log('-----------------',this.props.location.place)
 			let place = {
 				reviews: this.props.location.place.reviews.length
 			}
@@ -86,16 +88,26 @@ class Confirm extends React.Component {
 									</select>
 								</div>
 								<div className="group">
-									<label>Total: {moment.duration(moment(this.state.checkOut).diff(moment(this.state.checkIn), 'days'))} nights</label>
+									<label>Total: 3 nights</label>
 									<h2>$1,050</h2>
 								</div>
 								<button className="primary">Confirm</button>
 							</form>
 							<hr />
 							<button onClick={this.props.history.goBack}>Cancel</button>
+
+
+
 						</div>
 					</div>
 				</div>
+				<StripeProvider apiKey={`${process.env.STRIPE_PUBLIC_KEY}`}>
+					<div className="stripe-form">
+						<Elements>
+							<StripeForm />
+						</Elements>
+					</div>
+				</StripeProvider>
 			</body>
 		)
 	}

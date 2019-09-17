@@ -1,21 +1,19 @@
-import {Elements, StripeProvider} from react-stripe-elements
+import React from 'react'
+import {CardElement, injectStripe} from 'react-stripe-elements'
+import axios from 'axios'
 
-class StripeForm extends React.component {
+class StripeForm extends React.Component {
+
+
+
 	render() {
 		return(
-			<StripeProvider {process.env.STRIPE_PUBLIC_KEY}=>
-			  <Elements>
-					<div className="">
-			    	<FormComponent {this.props.stripe.createToken({})
-							.then(token => {
-								console.log(token)
-								axios.post(`${process.env.REACT_APP_API}/pay`)
-							}).catch(err =>{
-								console.log(err)
-							})}>
-					</div>
-			  </Elements>
-			</StripeProvider>
+					<CardElement />
 		)
 	}
 }
+
+
+
+
+export default injectStripe(StripeForm)
