@@ -88,7 +88,6 @@ class Place extends React.Component {
 		this.setState({endDate: date})
 	}
 
-
 	render () {
 		return (
 			<>
@@ -163,11 +162,6 @@ class Place extends React.Component {
 									</small>
 									<form className="small">
 										<div className="group">
-
-
-
-
-
 											<label>Dates</label>
 												<DatePicker
 													placeholderText="Check-in"
@@ -183,21 +177,9 @@ class Place extends React.Component {
 										<div className="group">
 											<label>Guests</label>
 											<select>
-												<option>1 guest</option>
-												<option>2 guests</option>
-												<option>3 guests</option>
-												<option>4 guests</option>
-												<option>5 guests</option>
-												<option>6 guests</option>
-												<option>7 guests</option>
-												<option>8 guests</option>
-												<option>9 guests</option>
-												<option>10 guests</option>
+												{[...Array(this.state.place.guests)].map((rating,i) => <option>{i+1} guests</option>)}
 											</select>
 										</div>
-
-
-
 										<div className="group">
 											<button className="secondary full" onClick={this.bookPlace} disabled= {(this.state.startDate ==='' || this.state.endDate==='' ? true : false)}>Book this place</button>
 										</div>
