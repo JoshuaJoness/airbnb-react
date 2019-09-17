@@ -25,6 +25,7 @@ import DatePicker from "react-datepicker"
 
 class Place extends React.Component {
 	state = {
+		user:{},
 		place: {
 			amenities:[],
 			host:{
@@ -48,22 +49,27 @@ class Place extends React.Component {
 	//to add review .then(res) state->place->reviews -> add res.data to top of array -> set state pf place:place(reviews) review_content: '', review_rating: 0 (to reset these 2), in postreviews you have to search the database for the user name and avatar : Review.findById(data._id).populate('author').then(review) => { res.send(review)}
 
 	UNSAFE_componentWillMount() {
-			if (localStorage.getItem('token')){
+		let token = localStorage.getItem('token')
+			if (token){
 				axios.get(`${process.env.REACT_APP_API}/places/${this.props.match.params.id}`)
 				.then(res => {
-					console.log('data', res.data)
-					console.log('date', this.date)
 					this.setState({
 						place: res.data
 					})
+					console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>', this.state.place);
 				}).catch(err => {
 					console.log(err)
 				})
+				axios.get(`${process.env.REACT_APP_API}/auth?token=${token}`).then(res => {
+							let user = this.state.user
+							user = res.data
+							this.setState({user})
+						}).catch(err => {
+							console.log(err)})
 			} else {
 				this.props.history.push("/")
 			}
 		}
-
 //each page has its own state, they're seperate not child and parent
 //in order to pass props to the route we're going // TODO:
 //react router dom feautures this.props.hisotry.push
@@ -91,7 +97,7 @@ class Place extends React.Component {
 	render () {
 		return (
 			<>
-				<Nav />
+				<Nav user={this.state.user}/>
 				<Gallery images={this.state.place.images}/>
 				<div className="grid medium">
 					<div className="grid sidebar-right">

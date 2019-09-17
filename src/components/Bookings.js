@@ -10,10 +10,11 @@ import '../styles/sidebar.css'
 import Nav from './Nav'
 import Sidebar from './Sidebar'
 import Thumbnail from './Thumbnail'
+import axios from 'axios'
 
 class Bookings extends React.Component {
 	state={
-
+		user:{},
 		places: [
 			{image:'https://q-ak.bstatic.com/images/hotel/max1024x768/186/186223203.jpg',
 				decription: 'Entire Villa • 3 Rooms',
@@ -45,17 +46,24 @@ class Bookings extends React.Component {
 	}
 
 	componentWillMount() {
-		if (localStorage.getItem('token')){
-			this.props.history.push("/bookings")
-		} else {
-			this.props.history.push("/")
+		let token = localStorage.getItem('token')
+		if (token){
+			axios.get(`${process.env.REACT_APP_API}/auth?token=${token}`).then(res => {
+				console.log(res.data);
+					let user = this.state.user
+					user = res.data
+					this.setState({user})
+				}).catch(err => {
+					console.log(err)})
+				} else {
+					this.props.history.push("/")
+				}
 		}
-	}
 
 	render () {
 		return (
 			<body>
-				<Nav />
+				<Nav user={this.state.user}/>
 				<div className="grid medium">
 					<div className="grid sidebar-left">
 						<Sidebar activePage={this.state.activePage}/>

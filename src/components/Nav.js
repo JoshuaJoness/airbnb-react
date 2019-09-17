@@ -8,8 +8,8 @@ class Nav extends React.Component {
 				<Link to="/index" className="logo" style={{backgroundImage: `url(${'../images/logo-airbnb.png'})`}}></Link>
 				<div className="profile">
 					<Link to="/profile" className="button">
-						<div className="avatar" style={{backgroundImage: `url(${'https://randomuser.me/api/portraits/men/9.jpg'})`}}></div>
-						<span>Tony</span>
+						<div className="avatar" style={{backgroundImage: this.props.user.avatar}}></div>
+						<span>{this.props.user.name}</span>
 					</Link>
 				</div>
 			</nav>

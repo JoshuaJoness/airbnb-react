@@ -13,37 +13,45 @@ import axios from 'axios'
 
 class Places extends React.Component {
 
-	componentWillMount() {
-		if (localStorage.getItem('token')){
-			axios.get(`${process.env.REACT_APP_API}/places`)
-			.then(res => {
-				console.log(res.data)
-				this.setState({
-					places: res.data,
-					originalPlaces: res.data
-				})
-			}).catch(err => {
-				console.log(err)
-			})
-			axios.get(`${process.env.REACT_APP_API}/types`)
-			.then(res => {
-				console.log(res.data)
-				this.setState({
-					types: res.data
-				})
-			}).catch(err => {
-				console.log(err)
-			})
-		} else {
-			this.props.history.push("/")
-		}
-		}
-
 	state = {
+		user: {},
 		places:[],
 		originalPlaces:[],
 		types:[]
 	}
+
+	componentWillMount() {
+		let token = localStorage.getItem('token')
+			if (token){
+				axios.get(`${process.env.REACT_APP_API}/places`)
+					.then(res => {
+						console.log(res.data)
+						this.setState({
+							places: res.data,
+							originalPlaces: res.data
+						})
+					}).catch(err => {
+						console.log(err)
+					})
+					axios.get(`${process.env.REACT_APP_API}/types`)
+					.then(res => {
+						console.log(res.data)
+						this.setState({
+							types: res.data
+						})
+					}).catch(err => {
+						console.log(err)
+					})
+					axios.get(`${process.env.REACT_APP_API}/auth?token=${token}`).then(res => {
+						let user = this.state.user
+						user = res.data
+						this.setState({user})
+						}).catch(err => {
+							console.log(err)})
+						} else {
+							this.props.history.push("/")
+						}
+					}
 
 	filterByType = (event) => {
 		let filteredPlaces
@@ -60,7 +68,7 @@ class Places extends React.Component {
 	render () {
 		return (
 			<body>
-				<Nav />
+				<Nav user={this.state.user}/>
 				<div className="filters">
 					<select>
 						<option value="1">Rooms: 1</option>

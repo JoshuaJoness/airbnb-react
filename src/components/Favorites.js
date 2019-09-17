@@ -9,9 +9,11 @@ import '../styles/icons.css'
 import Nav from './Nav'
 import Sidebar from './Sidebar'
 import Thumbnail from './Thumbnail'
+import axios from 'axios'
 
 class Favorites extends React.Component {
 	state = {
+		user:{},
 		activePage: 'Favorites',
 		places:
 		[
@@ -28,8 +30,14 @@ class Favorites extends React.Component {
 	}
 
 	componentWillMount() {
-		if (localStorage.getItem('token')){
-			this.props.history.push("/favorites")
+		let token = localStorage.getItem('token')
+		if (token){
+			axios.get(`${process.env.REACT_APP_API}/auth?token=${token}`).then(res => {
+						let user = this.state.user
+						user = res.data
+						this.setState({user})
+					}).catch(err => {
+						console.log(err)})
 		} else {
 			this.props.history.push("/")
 		}
@@ -38,7 +46,7 @@ class Favorites extends React.Component {
 	render () {
 		return (
 			<body>
-				<Nav />
+				<Nav user={this.state.user}/>
 				<div className="grid medium">
 					<div className="grid sidebar-left">
 						<Sidebar activePage={this.state.activePage}/>

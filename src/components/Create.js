@@ -7,21 +7,35 @@ import '../styles/forms.css'
 import '../styles/sidebar.css'
 import Nav from './Nav'
 import Sidebar from './Sidebar'
+import axios from 'axios'
 
 class Create extends React.Component {
 
+	state={
+		user:{}
+	}
+
 	componentWillMount() {
-		if (localStorage.getItem('token')){
-			this.props.history.push("/create")
-		} else {
+		let token = localStorage.getItem('token')
+		if (token){
+			axios.get(`${process.env.REACT_APP_API}/auth?token=${token}`).then(res => {
+						let user = this.state.user
+						user = res.data
+						this.setState({user})
+					}).catch(err => {
+						console.log(err)})
+			} else {
 			this.props.history.push("/")
 		}
 	}
 
+
+
+
 	render () {
 		return (
 			<body>
-				<Nav />
+				<Nav user={this.state.user}/>
 				<div className="grid medium">
 					<div className="grid sidebar-left">
 						<Sidebar />
