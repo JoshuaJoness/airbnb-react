@@ -21,3 +21,6 @@ class Review extends React.Component {
 }
 
 export default Review
+
+
+//content is going to be coming from state, author is user._id, save the id in state

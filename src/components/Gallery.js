@@ -11,6 +11,10 @@ class Gallery extends React.Component {
 		this.setState({selected: foundImage})
 	}
 
+	componentWillReceiveProps (props) {
+		this.setState({images: props.images, selected: props.images[0]})
+	}
+
 	render () {
 		return (
 			<div className="gallery">
