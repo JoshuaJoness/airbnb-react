@@ -44,7 +44,8 @@ class Confirm extends React.Component {
 		checkOut:'',
 		guests: 0,
 		user:{},
-		pk: ''
+		pk: '',
+		total: 0
 
 	}
 
@@ -123,7 +124,7 @@ class Confirm extends React.Component {
 						</div>
 					</div>
 				</div>
-					<StripeProvider apiKey='pk_test_E3fCpV8m1GhstYt5O7hnIQYs00Da1UQSBp'>
+					<StripeProvider apiKey='pk_test_E3fCpV8m1GhstYt5O7hnIQYs00Da1UQSBp' total={this.state.total} place={this.state.place.title}>
 						<div className="stripe-form">
 							<Elements>
 								<StripeForm />

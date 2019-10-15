@@ -52,7 +52,6 @@ class Signup extends React.Component {
 						<div className="content">
 							<div className="logo" style={{backgroundImage: `url(${'../images/logo-airbnb.png'})`}}></div>
 
-							//put the onSubmit in the form as opposed to the button, why?
 							<form onSubmit={this.signup}>
 								<div className="group">
 									<label>Name</label>
