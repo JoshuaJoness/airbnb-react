@@ -14,9 +14,7 @@ class StripeForm extends React.Component {
 			.then(token => {
 				console.log(token)
 				axios.post(`${process.env.REACT_APP_API}/pay`,
-					token,
-					amount,
-					title
+					token
 				).then(res => {
 					console.log(res.data);
 				})
