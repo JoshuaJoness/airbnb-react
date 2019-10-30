@@ -26,7 +26,7 @@ class Login extends React.Component {
 		).then(res => {
 		console.log('data', res.data)
 		localStorage.setItem('token', res.data.token)
-		this.props.history.push("/")
+		this.props.history.push("/places")
 		}
 	)
 } else {
@@ -48,7 +48,7 @@ class Login extends React.Component {
 				<div className="grid center middle tall image">
 					<div className="card small">
 						<div className="content">
-							<div className="logo" style={{backgroundImage: `url(${'../images/logo-airbnb.png'})`}}></div>
+							<div className="logo" style={{backgroundImage: `url(${'./logo-airbnb.png'})`}}></div>
 
 
 							<form onSubmit={this.logIntoPage}>
