@@ -33,9 +33,9 @@ class Create extends React.Component {
 	}
 
 	postPlace = () => {
-		axios.post(`${process.env.REACT_APP_API}/place`, {
+		axios.post(`${process.env.REACT_APP_API}/place`,
     this.state.place
-  })
+  )
   .then(res => {
 		console.log('.........', res.data);
 	})
@@ -122,7 +122,7 @@ class Create extends React.Component {
 										<input onChange={(e)=>this.addAmenities('Swimming Pool')} type="checkbox" /> Swimming Pool
 									</label>
 									<label className="checkbox">
-										<input onChange={(e)=>this.addAmenities('Kitchen')} type="checkbox" /> Kitchen
+										<input onChange={(e)=>this.addAmenities('5d7f63b83b72fd00170fb54f')} type="checkbox" /> Kitchen
 									</label>
 									<label className="checkbox">
 										<input onChange={(e)=>this.addAmenities('Wi-Fi')} type="checkbox" /> Wi-Fi
@@ -131,10 +131,10 @@ class Create extends React.Component {
 										<input onChange={(e)=>this.addAmenities('TV')} type="checkbox" /> TV
 									</label>
 									<label className="checkbox">
-										<input onChange={(e)=>this.addAmenities('Gym')} type="checkbox" /> Gym
+										<input onChange={(e)=>this.addAmenities('5d7f63b83b72fd00170fb550')} type="checkbox" /> Gym
 									</label>
 									<label className="checkbox">
-										<input onChange={(e)=>this.addAmenities('Iron')} type="checkbox" /> Iron
+										<input onChange={(e)=>this.addAmenities('5d7f63b83b72fd00170fb551')} type="checkbox" /> Iron
 									</label>
 									<label className="checkbox">
 										<input onChange={(e)=>this.addAmenities('Air Conditioning')} type="checkbox" /> Air Conditioning
