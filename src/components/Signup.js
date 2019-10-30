@@ -50,7 +50,7 @@ class Signup extends React.Component {
 				<div className="grid center middle tall image">
 					<div className="card small">
 						<div className="content">
-							<div className="logo" style={{backgroundImage: `url(${'../images/logo-airbnb.png'})`}}></div>
+							<div className="logo" style={{backgroundImage: `url(${'./logo-airbnb.png'})`}}></div>
 
 							<form onSubmit={this.signup}>
 								<div className="group">
