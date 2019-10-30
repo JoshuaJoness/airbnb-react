@@ -33,7 +33,15 @@ class Create extends React.Component {
 	}
 
 	postPlace = () => {
-		console.log('hello');
+		axios.post(`${process.env.REACT_APP_API}/place`, {
+    this.state.place
+  })
+  .then(res => {
+		console.log('.........', res.data);
+	})
+  .catch(err => {
+		console.log(err);
+	})
 	}
 
 	changeField = (e, field) => {
