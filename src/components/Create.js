@@ -33,10 +33,7 @@ class Create extends React.Component {
 	}
 
 	postPlace = () => {
-		axios.post(`${process.env.REACT_APP_API}/place`,
-		req.body).then(res => {
-			console.log(res.data);
-		})
+		console.log('hello');
 	}
 
 	changeField = (e, field) => {
@@ -52,8 +49,6 @@ class Create extends React.Component {
 		this.setState({place})
 		console.log(this.state.place);
 	}
-
-
 
 	render () {
 		return (
