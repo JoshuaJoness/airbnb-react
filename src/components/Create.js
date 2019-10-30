@@ -33,7 +33,7 @@ class Create extends React.Component {
 	}
 
 	postPlace = () => {
-
+		axios.post(`${process.env.REACT_APP_API}/place`,)
 	}
 
 	changeField = (e, field) => {
@@ -61,7 +61,7 @@ class Create extends React.Component {
 						<Sidebar />
 						<div className="content">
 							<h2>Host a new place</h2>
-							<form>
+							<form onSubmit={this.postPlace}>
 								<div className="group">
 									<label>Title</label>
 									<input onChange={(e)=>this.changeField(e,'title')} type="text" />
