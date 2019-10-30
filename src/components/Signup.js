@@ -44,13 +44,17 @@ class Signup extends React.Component {
 	}
 }
 
+	mouse = () => {
+		console.log('hello');
+	}
+
 	render () {
 		return (
 			<body>
 				<div className="grid center middle tall image">
 					<div className="card small">
 						<div className="content">
-							<div className="logo" style={{backgroundImage: `url(${'./logo-airbnb.png'})`}}></div>
+							<div onMouseOver={this.mouse} className="logo" style={{backgroundImage: `url(${'./logo-airbnb.png'})`}}></div>
 
 							<form onSubmit={this.signup}>
 								<div className="group">
