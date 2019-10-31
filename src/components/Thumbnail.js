@@ -20,7 +20,7 @@ class Thumbnail extends React.Component {
 				</div>
 				<div className="content">
 					<small className="meta">{this.props.place.description}</small>
-					<h2>{this.props.place.type.name}</h2>
+					<h2>{this.props.place.title}</h2>
 					<small className="location">
 						<i className="fas fa-map-marker-alt"></i>
 						<span>{this.props.place.location}</span>

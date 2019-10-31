@@ -119,7 +119,7 @@ class Create extends React.Component {
 								<div className="group">
 									<label>Amenities</label>
 									<label className="checkbox">
-										<input onChange={(e)=>this.addAmenities('Swimming Pool')} type="checkbox" /> Swimming Pool
+										<input onChange={(e)=>this.addAmenities('5d7f63b83b72fd00170fb552')} type="checkbox" /> Swimming Pool
 									</label>
 									<label className="checkbox">
 										<input onChange={(e)=>this.addAmenities('5d7f63b83b72fd00170fb54f')} type="checkbox" /> Kitchen
@@ -128,7 +128,7 @@ class Create extends React.Component {
 										<input onChange={(e)=>this.addAmenities('Wi-Fi')} type="checkbox" /> Wi-Fi
 									</label>
 									<label className="checkbox">
-										<input onChange={(e)=>this.addAmenities('TV')} type="checkbox" /> TV
+										<input onChange={(e)=>this.addAmenities('5d7f63b83b72fd00170fb554')} type="checkbox" /> TV
 									</label>
 									<label className="checkbox">
 										<input onChange={(e)=>this.addAmenities('5d7f63b83b72fd00170fb550')} type="checkbox" /> Gym
@@ -137,7 +137,7 @@ class Create extends React.Component {
 										<input onChange={(e)=>this.addAmenities('5d7f63b83b72fd00170fb551')} type="checkbox" /> Iron
 									</label>
 									<label className="checkbox">
-										<input onChange={(e)=>this.addAmenities('Air Conditioning')} type="checkbox" /> Air Conditioning
+										<input onChange={(e)=>this.addAmenities('5d7f63b83b72fd00170fb553')} type="checkbox" /> Air Conditioning
 									</label>
 								</div>
 								<button className="primary">Publish this Place</button>
