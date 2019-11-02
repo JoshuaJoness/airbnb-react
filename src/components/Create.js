@@ -12,7 +12,9 @@ import axios from 'axios'
 class Create extends React.Component {
 
 	state={
-		user:{},
+		user:{
+			location:''
+		},
 		place:{
 			amenities: []
 		}
@@ -33,6 +35,7 @@ class Create extends React.Component {
 	}
 
 	postPlace = () => {
+		this.state.place.host = this.state.user._id
 		axios.post(`${process.env.REACT_APP_API}/place`,
     this.state.place
   )
@@ -91,13 +94,13 @@ class Create extends React.Component {
 								<div className="group">
 									<label>Type</label>
 									<select onChange={(e)=>this.changeField(e,'type')}>
-										<option>Entire Villa</option>
-										<option>Entire House</option>
-										<option>Entire Apartment</option>
-										<option>Private Room</option>
-										<option>Shared Villa</option>
-										<option>Shared House</option>
-										<option>Shared Apartment</option>
+										<option value="5d7f5a883b72fd00170fb547">Entire Villa</option>
+										<option value="5d7f5fad3b72fd00170fb549">Entire House</option>
+										<option value="5d7f5fbc3b72fd00170fb54a">Entire Apartment</option>
+										<option value="5d7f5fcb3b72fd00170fb54b">Private Room</option>
+										<option value="5d7f5fdf3b72fd00170fb54c">Shared Villa</option>
+										<option value="5d7f5ff03b72fd00170fb54d">Shared House</option>
+										<option value="5d7f5ff63b72fd00170fb54e">Shared Apartment</option>
 									</select>
 								</div>
 								<div className="group">
