@@ -84,7 +84,7 @@ class Create extends React.Component {
 			axios.post(`${process.env.REACT_APP_API}/place`,
 				place)
 			.then(res => {
-				console.log('response data',res.data);
+				this.props.history.push("/places")
 			})
 			.catch(err => {
 				console.log(err);
