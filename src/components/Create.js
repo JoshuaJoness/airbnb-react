@@ -16,8 +16,10 @@ class Create extends React.Component {
 			location:''
 		},
 		place:{
-			amenities: []
-		}
+			amenities: [],
+			images:[]
+		},
+		fileStorage:{}
 	}
 
 	componentWillMount() {
@@ -34,19 +36,6 @@ class Create extends React.Component {
 		}
 	}
 
-	postPlace = () => {
-		this.state.place.host = this.state.user._id
-		axios.post(`${process.env.REACT_APP_API}/place`,
-    this.state.place
-  )
-  .then(res => {
-		console.log('.........', res.data);
-	})
-  .catch(err => {
-		console.log(err);
-	})
-	}
-
 	changeField = (e, field) => {
 		let place = this.state.place
 		place[field] = e.target.value
@@ -61,6 +50,51 @@ class Create extends React.Component {
 		console.log(this.state.place);
 	}
 
+	getFile = (e) => {
+		let file = e.target.files[0]
+		console.log('>>>>>>>>>>>>',file);
+		let fileStorage = this.state.file
+		fileStorage = file
+		this.setState({fileStorage})
+		console.log('place',this.state.fileStorage);
+	}
+
+	postPlace = (e) => {
+		const CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/doflsgrub/image/upload'
+		const CLOUDINARY_UPLOAD_PRESET = 'dklr5vf0'
+		e.preventDefault()
+		let file = this.state.fileStorage
+		let formData = new FormData()
+		formData.append('file', file)
+		formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET)
+		axios({
+			url: CLOUDINARY_URL,
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/x-www-form-urlencoded'
+			},
+			data:formData
+		}).then(res => {
+			console.log('response data',res.data);
+			let place = this.state.place
+			place.host = this.state.user._id
+			place.images.push(res.data.url)
+			// this.setState({place})
+			this.setState({images: ["test"]})
+			axios.post(`${process.env.REACT_APP_API}/place`,
+				place)
+			.then(res => {
+				console.log('response data',res.data);
+			})
+			.catch(err => {
+				console.log(err);
+			})
+		})
+		.catch(err=>{
+			console.log(err);
+		})
+	}
+
 	render () {
 		return (
 			<body>
@@ -70,7 +104,9 @@ class Create extends React.Component {
 						<Sidebar />
 						<div className="content">
 							<h2>Host a new place</h2>
+
 							<form onSubmit={this.postPlace}>
+
 								<div className="group">
 									<label>Title</label>
 									<input onChange={(e)=>this.changeField(e,'title')} type="text" />
@@ -117,7 +153,9 @@ class Create extends React.Component {
 								</div>
 								<div className="group">
 									<label>Upload Photos</label>
-									<input onChange={(e)=>this.changeField(e,'images')} type="file" multiple />
+
+									<input type="file"name="image"onChange={this.getFile} />
+
 								</div>
 								<div className="group">
 									<label>Amenities</label>

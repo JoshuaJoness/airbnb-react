@@ -25,7 +25,6 @@ class Places extends React.Component {
 			if (token){
 				axios.get(`${process.env.REACT_APP_API}/places`)
 					.then(res => {
-						console.log(res.data)
 						this.setState({
 							places: res.data,
 							originalPlaces: res.data
@@ -35,7 +34,6 @@ class Places extends React.Component {
 					})
 					axios.get(`${process.env.REACT_APP_API}/types`)
 					.then(res => {
-						console.log(res.data)
 						this.setState({
 							types: res.data
 						})
