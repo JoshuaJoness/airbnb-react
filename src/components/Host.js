@@ -16,24 +16,7 @@ class Host extends React.Component {
 	state = {
 		user:{},
 		places: [
-			{
-				image:'https://q-ak.bstatic.com/images/hotel/max1024x768/186/186223203.jpg',
-					decription: 'Entire Villa • 3 Rooms',
-					type:'Luxury Villa Indu Siam',
-					location:'Koh Samui, Thailand',
-					price: '$198/night',
-					rating: 4,
-					reviews:'29 Reviews',
-			},
-			{
-				image:'https://a0.muscache.com/4ea/air/v2/pictures/eee424d0-ca05-4405-8bdb-e5caf2db3fbe.jpg',
-					decription: 'Entire House • 1 Room',
-					type:'Dreamy Tropical Tree House',
-					location:'Hilo Forest, Hawaii',
-					price: '$120/night',
-					rating: 5,
-					reviews:'127 Reviews',
-			},
+
 		],
 		activePage: 'Host'
 	}
@@ -45,6 +28,18 @@ class Host extends React.Component {
 							let user = this.state.user
 							user = res.data
 							this.setState({user})
+
+							axios.post(`${process.env.REACT_APP_API}/hosting`, this.state.user)
+							.then(res => {
+								console.log('res.data',res.data);
+								let places = this.state.places
+								places = res.data
+								this.setState({places}, ()=> {console.log(this.state)})
+
+							}).catch(err=>{
+								console.log(err);
+							})
+
 						}).catch(err => {
 							console.log(err)})
 				} else {
