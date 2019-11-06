@@ -53,7 +53,8 @@ class Signup extends React.Component {
 					user.avatar = res.data.url
 					axios.post(`${process.env.REACT_APP_API}/signup`,
 					user).then(res => {
-						localStorage.setItem('token', res.data.token)
+						console.log('response', res.data);
+						localStorage.setItem('token', res.data)
 						this.props.history.push("/places")
 						console.log('Success')
 					}).catch(err => {
