@@ -15,9 +15,7 @@ import axios from 'axios'
 class Host extends React.Component {
 	state = {
 		user:{},
-		places: [
-
-		],
+		places: [],
 		activePage: 'Host'
 	}
 

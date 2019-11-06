@@ -1,1 +1,4 @@
-Had to change res.data.token to res.data on Signup page, at the axios post request to POST signup in order to be able to get the token... why? not sure. 
+Had to change res.data.token to res.data on Signup page, at the axios post request to POST signup in order to be able to get the token... why? not sure.
+
+places that I am hosting, will display locally but not on heroku. It seems like it cannot connect to the API backend POST getHosting
+-NOW it's working, just had to merge branches
