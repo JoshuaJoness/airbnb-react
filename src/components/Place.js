@@ -109,7 +109,7 @@ class Place extends React.Component {
 								<span>{this.state.place.city}, {this.state.place.country}</span>
 							</small>
 							<div className="user">
-								<div className="avatar" style={{backgroundImage: this.state.place.host.avatar}}></div>
+								<div className="avatar" style={{backgroundImage: `url(${this.state.place.host.avatar})`}}></div>
 								<div className="name">
 									<small>Hosted by</small>
 									<span>{this.state.place.host.name}</span>

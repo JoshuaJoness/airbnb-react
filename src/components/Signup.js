@@ -27,22 +27,44 @@ class Signup extends React.Component {
 		console.log(this.state.user);
 	}
 
+	getFile = (e) => {
+		let file = e.target.files[0]
+		let fileStorage = this.state.file
+		fileStorage = file
+		this.setState({fileStorage})
+	}
+
 	signup = (e) => {
 		e.preventDefault()
-		let user = this.state.user
-		if (user.email && user.location && user.name && user.password)
-		{	axios.post(`${process.env.REACT_APP_API}/signup`,
-			this.state.user
-		).then(res => {
-			console.log('data', res.data)
-			localStorage.setItem('token', res.data)
-			this.props.history.push("/places")
+		const CLOUDINARY_URL='https://api.cloudinary.com/v1_1/doflsgrub/image/upload'
+		const CLOUDINARY_UPLOAD_PRESET='dklr5vf0'
+		let file = this.state.fileStorage
+		let formData = new FormData()
+			formData.append('file', file)
+			formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET)
+			axios({
+				url: CLOUDINARY_URL,
+				method: 'POST',
+				headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+				data: formData
+			}).then(res => {
+				let user = this.state. user
+				if (user.email && user.location && user.name && user.password){
+					user.avatar = res.data.url
+					axios.post(`${process.env.REACT_APP_API}/signup`,
+					user).then(res => {
+						console.log('Success')
+					}).catch(err => {
+						console.log(err);
+					})
+				} else{
+					alert('Please complete all the fields')
+				}
+			}).catch(err => {
+				console.log(err);
+			})
 			}
-		)
-	} else {
-		alert('Please complete all the fields');
-	}
-}
+
 
 	mouse = () => {
 		console.log('hello');
@@ -75,7 +97,7 @@ class Signup extends React.Component {
 								</div>
 								<div className="group">
 									<label>Profile Picture</label>
-									<input type="file"/>
+									<input type="file"name="image"onChange={this.getFile} />
 								</div>
 								<button className="primary">Signup</button>
 							</form>

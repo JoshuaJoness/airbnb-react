@@ -5,13 +5,10 @@ class Thumbnail extends React.Component {
 
 	renderDates = () => {
 		if (this.props.place.date) {
-		return <span className="date">{this.props.place.date}</span>
-	}
-	}
+		return <span className="date">{this.props.place.date}</span>}}
 
 	render () {
 		return (
-
 			<Link className="card link" to={`${'/place'}/${this.props.place._id}`}>
 				<div className="image" style= {{backgroundImage: `url(${this.props.place.image})`}}>
 					<button className="icon">
