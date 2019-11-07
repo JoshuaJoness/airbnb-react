@@ -127,9 +127,7 @@ class Confirm extends React.Component {
 					<StripeProvider apiKey='pk_test_E3fCpV8m1GhstYt5O7hnIQYs00Da1UQSBp' total={this.state.total} place={this.state.place.title}>
 						<div className="stripe-form">
 							<Elements>
-								<StripeForm> {this.props.stripe.createToken({}).then(token => {
-								  console.log('hi');
-								})} </StripeForm>
+								<StripeForm />
 							</Elements>
 						</div>
 					</StripeProvider>
