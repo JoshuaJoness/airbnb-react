@@ -7,11 +7,15 @@ class Thumbnail extends React.Component {
 		if (this.props.place.date) {
 		return <span className="date">{this.props.place.date}</span>}}
 
+	like = () => {
+		console.log('hi');
+	}
+
 	render () {
 		return (
 			<Link className="card link" to={`${'/place'}/${this.props.place._id}`}>
 				<div className="image" style= {{backgroundImage: `url(${this.props.place.image})`}}>
-					<button className="icon">
+					<button className="icon" onClick={this.like}>
 						<i className="fas fa-heart"></i>
 					</button>
 				</div>
