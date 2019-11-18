@@ -5,7 +5,7 @@ import axios from 'axios'
 class StripeForm extends React.Component {
 
 	state={
-		total: this.props.total,
+		amount: this.props.amount,
 		place: this.props.place
 	}
 
@@ -13,8 +13,11 @@ class StripeForm extends React.Component {
 		this.props.stripe.createToken({})
 			.then(token => {
 				console.log(token)
+				console.log('amount',this.state.amount);
+				let amount = this.state.amount
 				axios.post(`${process.env.REACT_APP_API}/pay`,
-					token
+					{token: token,
+					amount: amount}
 				).then(res => {
 					console.log(res.data);
 				})
@@ -25,10 +28,11 @@ class StripeForm extends React.Component {
 
 	render() {
 		return(
-			<>
-					<CardElement />
-					<button className="primary" onClick={this.makePayment}>Pay</button>
-			</>
+			<div className="checkout">
+				<p>Would you like to complete the purchase?</p>
+				<CardElement />
+				<button className="primary" onClick={this.makePayment}>Pay</button>
+			</div>
 		)
 	}
 }

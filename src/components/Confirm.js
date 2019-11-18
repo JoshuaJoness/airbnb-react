@@ -11,8 +11,7 @@ import Nav from './Nav'
 import Thumbnail from './Thumbnail'
 import moment from 'moment'
 import axios from 'axios'
-import {BrowserRouter, Switch, Route} from 'react-router-dom'
-import {Elements, StripeProvider} from 'react-stripe-elements'
+import {Elements, StripeProvider, FormComponent} from 'react-stripe-elements'
 import StripeForm from './StripeForm'
 
 class Confirm extends React.Component {
@@ -46,11 +45,9 @@ class Confirm extends React.Component {
 		user:{},
 		pk: '',
 		total: 0
-
 	}
 
-	componentWillMount() {
-
+	UNSAFE_componentWillMount() {
 		console.log(this.props.location.place);
 		let place = this.props.location.place
 		place.image = place.images[0]
@@ -58,7 +55,6 @@ class Confirm extends React.Component {
 		if (token){
 			this.setState({
 				place: place,
-
 			 checkIn: this.props.location.checkIn,
 			 checkOut: this.props.location.checkOut,
 			 guests: this.props.location.guests
@@ -70,7 +66,6 @@ class Confirm extends React.Component {
 						console.log('>>>>>>>>>>>>>>>', this.state)
 					})
 				}).catch(err => {console.log(err);})
-
 		} else {
 			this.props.history.push("/")
 		}
@@ -115,7 +110,7 @@ class Confirm extends React.Component {
 								</div>
 								<div className="group">
 									<label>Total: {moment.duration(moment(this.state.checkOut).diff(moment(this.state.checkIn))).days()} nights</label>
-									<h2>$1,050</h2>
+									<h2>$ {this.state.place.price * moment.duration(moment(this.state.checkOut).diff(moment(this.state.checkIn))).days()}</h2>
 								</div>
 								<button className="primary">Confirm</button>
 							</form>
@@ -124,16 +119,17 @@ class Confirm extends React.Component {
 						</div>
 					</div>
 				</div>
-					<StripeProvider apiKey='pk_test_E3fCpV8m1GhstYt5O7hnIQYs00Da1UQSBp' total={this.state.total} place={this.state.place.title}>
-						<div className="stripe-form">
-							<Elements>
-								<StripeForm />
-							</Elements>
-						</div>
-					</StripeProvider>
+				<StripeProvider apiKey='pk_test_E3fCpV8m1GhstYt5O7hnIQYs00Da1UQSBp'>
+					<div className="stripe-form">
+						<Elements>
+							<StripeForm amount={Number(this.state.place.price * moment.duration(moment(this.state.checkOut).diff(moment(this.state.checkIn))).days())} place={this.state.place.title}/>
+						</Elements>
+					</div>
+				</StripeProvider>
 			</body>
 		)
 	}
 }
+
 
 export default Confirm

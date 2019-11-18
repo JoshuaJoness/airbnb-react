@@ -54,7 +54,6 @@ class Place extends React.Component {
 			if (token){
 				axios.get(`${process.env.REACT_APP_API}/places/${this.props.match.params.id}`)
 				.then(res => {
-					console.log('......................',res.data)
 					this.setState({
 						place: res.data
 					})
@@ -118,7 +117,7 @@ class Place extends React.Component {
 							<div className="card specs">
 								<div className="content">
 									<ul className="grid two">
-										<li><i className="fas fa-fw fa-home"></i>{this.state.place.type.name}</li>
+										<li><i className="fas fa-fw fa-home"></i>'this.state.place.type.name'</li>
 										<li><i className="fas fa-fw fa-user-friends"></i>{this.state.place.guests} guests</li>
 										<li><i className="fas fa-fw fa-bed"></i>{this.state.place.bedrooms}</li>
 										<li><i className="fas fa-fw fa-bath"></i>{this.state.place.bathrooms} baths</li>
