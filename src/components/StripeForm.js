@@ -9,7 +9,8 @@ class StripeForm extends React.Component {
 		place: this.props.place
 	}
 
-	makePayment = () => {
+	makePayment = (e) => {
+		e.preventDefault()
 		this.props.stripe.createToken({})
 			.then(token => {
 				console.log(token)
