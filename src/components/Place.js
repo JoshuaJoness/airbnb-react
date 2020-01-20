@@ -99,8 +99,8 @@ class Place extends React.Component {
 			<>
 				<Nav user={this.state.user}/>
 				<Gallery images={this.state.place.images}/>
-				<div className="grid medium" id="gridContainer">
-					<div className="grid sidebar-right" id="gridSidebarRight">
+				<div className="grid medium">
+					<div className="grid sidebar-right">
 						<div className="content">
 							<h1>{this.state.place.title}</h1>
 							<small>
@@ -116,7 +116,7 @@ class Place extends React.Component {
 							</div>
 							<div className="card specs">
 								<div className="content">
-									<ul className="grid two" id="gridTwo">
+									<ul className="grid two">
 										<li><i className="fas fa-fw fa-home"></i>'this.state.place.type.name'</li>
 										<li><i className="fas fa-fw fa-user-friends"></i>{this.state.place.guests} guests</li>
 										<li><i className="fas fa-fw fa-bed"></i>{this.state.place.bedrooms}</li>
@@ -154,7 +154,7 @@ class Place extends React.Component {
 								}
 							</div>
 						</div>
-						<div className="sidebar booking" id="sidebarBooking">
+						<div className="sidebar booking">
 							<div className="card shadow">
 								<div className="content large">
 									<h3>${this.state.place.price}<small>per night</small></h3>

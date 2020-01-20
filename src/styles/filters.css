@@ -52,24 +52,3 @@
 .filters .search input:focus {
 	border-color: #00988f;
 }
-
-@media only screen and (min-width: 320px) and (max-width: 479px) {
-	.filters{
-		display: grid;
-		grid-template-columns: 25% 25% 28% 22%;
-	}
-	.filters select{
-		margin-left: 2%;
-	}
-	#places{
-		display: flex;
-		flex-wrap: wrap;
-		margin-bottom: 5%;
-	}
-	#placesCard{
-		margin-bottom: 15%;
-	}
-	#gridContainer{
-		width: fit-content;
-	}
-}

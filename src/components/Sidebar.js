@@ -1,6 +1,5 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import '../styles/global.css'
 
 class Sidebar extends React.Component {
 	state = {
@@ -9,7 +8,7 @@ class Sidebar extends React.Component {
 	render () {
 		return (
 			<div className="sidebar">
-				<ul id="sidebar">
+				<ul>
 					<li className={this.state.activePage === 'Profile' ? 'active' : '' }>
 						<Link to="/profile">Profile</Link>
 					</li>

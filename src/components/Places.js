@@ -94,7 +94,7 @@ class Places extends React.Component {
 					</select>
 					<input type="text" className="search" placeholder="Search..." />
 				</div>
-				<div className="grid five large" id="places">
+				<div className="grid five large">
 				{
 					this.state.places.map((place,i) => <Thumbnail key={i} place={place}/>)
 				}

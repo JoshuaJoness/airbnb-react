@@ -46,7 +46,7 @@ class Login extends React.Component {
 		return (
 			<body>
 				<div className="grid center middle tall image">
-					<div className="card small" id="loginCard" style={{opacity:"0.95"}}>
+					<div className="card small">
 						<div className="content">
 							<div className="logo" style={{backgroundImage: `url(${'./logo-airbnb.png'})`}}></div>
 
@@ -60,7 +60,7 @@ class Login extends React.Component {
 									<label>Password</label>
 									<input type="password" onChange={(e)=>this.changeField(e, 'password')}/>
 								</div>
-								<button className="primary" id="loginButton">Login</button>
+								<button className="primary">Login</button>
 							</form>
 							<p className="footer">
 								New to Airbnb? <Link to="/Signup">Signup</Link>
