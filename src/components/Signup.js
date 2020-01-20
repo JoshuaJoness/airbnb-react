@@ -76,8 +76,8 @@ class Signup extends React.Component {
 	render () {
 		return (
 			<body>
-				<div className="grid center middle tall image">
-					<div className="card small">
+				<div className="grid center middle tall image" id="signUpContainer">
+					<div className="card small" id="signupCard" style={{opacity:"0.95"}}>
 						<div className="content">
 							<div onMouseOver={this.mouse} className="logo" style={{backgroundImage: `url(${'./logo-airbnb.png'})`}}></div>
 
@@ -102,7 +102,7 @@ class Signup extends React.Component {
 									<label>Profile Picture</label>
 									<input type="file"name="image"onChange={this.getFile} />
 								</div>
-								<button className="primary">Signup</button>
+								<button className="primary" id="signupButton">Signup</button>
 							</form>
 							<p className="footer">
 								Already have an account? <Link to="/Login">Login</Link>

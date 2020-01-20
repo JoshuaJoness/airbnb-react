@@ -9,7 +9,7 @@ class Thumbnail extends React.Component {
 
 	render () {
 		return (
-			<Link className="card link" to={`${'/place'}/${this.props.place._id}`}>
+			<Link className="card link" id="placesCard" to={`${'/place'}/${this.props.place._id}`}>
 				<div className="image" style= {{backgroundImage: `url(${this.props.place.image})`}}>
 					<button className="icon">
 						<i className="fas fa-heart"></i>
