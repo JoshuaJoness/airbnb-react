@@ -51,6 +51,10 @@ class Places extends React.Component {
 						}
 					}
 
+	filterByRooms = (event) => {
+		console.log(this.state);
+	}
+
 	filterByType = (event) => {
 		let filteredPlaces
 
@@ -63,12 +67,37 @@ class Places extends React.Component {
 		this.setState({places: filteredPlaces})
 	}
 
+	filterByTitleOrType = (event) => {
+		let filteredPlaces
+		if (!event.target.value) {
+			filteredPlaces = this.state.originalPlaces
+		} else {
+			filteredPlaces = this.state.places.filter(place => place.title.toLowerCase().includes(event.target.value.toLowerCase()) )
+		}
+		console.log(filteredPlaces);
+		this.setState({places: filteredPlaces})
+	}
+
+	sortPlaces = (event) => {
+		let filteredPlaces
+		if (event.target.value == 'price') {
+			filteredPlaces = this.state.places.sort((a,b) => a.price - b.price)
+			this.setState({places:filteredPlaces})
+		} else if (event.target.value == 'rating') {
+			filteredPlaces = this.state.places.sort((a,b) => a.rating - b.rating)
+			this.setState({places:filteredPlaces}) }
+			else if (event.target.value == 'latest'){
+				filteredPlaces = this.state.places.sort((a,b) => !(a.price - b.price))
+				this.setState({places:filteredPlaces})
+			}
+		}
+
 	render () {
 		return (
 			<body>
 				<Nav user={this.state.user}/>
 				<div className="filters">
-					<select>
+					<select onChange={this.filterByRooms}>
 						<option value="1">Rooms: 1</option>
 						<option value="1">Rooms: 2</option>
 						<option value="1">Rooms: 3</option>
@@ -87,12 +116,12 @@ class Places extends React.Component {
 						}
 					</select>
 					<input type="number" placeholder="max price" />
-					<select>
+					<select onChange={this.sortPlaces}>
 						<option value="date">Latest</option>
 						<option value="price">Price</option>
 						<option value="rating">Rating</option>
 					</select>
-					<input type="text" className="search" placeholder="Search..." />
+					<input type="text" className="search" placeholder="Search..." onChange={this.filterByTitleOrType}/>
 				</div>
 				<div className="grid five large">
 				{
